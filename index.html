@@ -79,12 +79,12 @@
         }
         .final-word {
             font-size: 4em;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            position: fixed !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
             animation: finalAppear 1s ease-in-out, pulse 2s infinite;
-            z-index: 4;
+            z-index: 9999;
             mix-blend-mode: screen;
             text-shadow: 
                 0 0 15px #ff6b6b,
@@ -213,6 +213,10 @@
                     const finalWord = document.createElement('span');
                     finalWord.className = 'final-word';
                     finalWord.textContent = ' люблю!';
+                    finalWord.style.position = 'fixed';
+                    finalWord.style.left = '50%';
+                    finalWord.style.top = '50%';
+                    finalWord.style.transform = 'translate(-50%, -50%)';
                     document.body.appendChild(finalWord);
                     setTimeout(() => {
                         finalWord.style.animation = 'finalAppear 1s ease-in-out,pulse 2s infinite';
