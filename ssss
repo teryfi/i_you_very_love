@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Любовное послание</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            background: #000;
+            position: relative;
+        }
+        @keyframes starBlink {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; transform: scale(1.5); }
+            100% { opacity: 0.3; }
+        }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: starBlink 2s infinite;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.5s;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff7e5f, #ff4b4b);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,75,75,0.5);
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255,75,75,0.8);
+        }
+        #message {
+            position: relative;
+            max-width: 80%;
+        }
+        .love-word {
+            position: absolute;
+            animation: appear 0.8s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .final-word {
+            font-size: 3em;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: finalAppear 1s ease-in-out, pulse 2s infinite;
+            z-index: 4;
+            mix-blend-mode: screen;
+            text-shadow: 
+                0 0 10px #ff6b6b,
+                0 0 20px #ff6b6b,
+                0 0 40px #ff6b6b;
+            background: linear-gradient(45deg, #ff4b4b, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Cursive', cursive;
+            font-weight: bold;
+            transform-style: preserve-3d;
+        }
+        @keyframes finalAppear {
+            from { opacity: 0; transform: scale(0) translate(-50%, -50%); }
+            to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+        }
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #ff6b6b; }
+            50% { text-shadow: 0 0 30px #ff6b6b; }
+            100% { text-shadow: 0 0 10px #ff6b6b; }
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Звезды -->
+    <div class="stars">
+        <script>
+            for(let i=0; i<50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random()*100 + 'vw';
+                star.style.top = Math.random()*100 + 'vh';
+                document.body.appendChild(star);
+            }
+        </script>
+    </div>
+
+    <div class="container">
+        <button id="myButton" onclick="startMessage()">очень?</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        function getRandomPosition() {
+            return {
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight
+            };
+        }
+
+        function getRandomSize() {
+            return 12 + Math.random() * 20; // случайный размер от 12 до 32px
+        }
+
+        function getRandomColor() {
+            const red = Math.floor(200 + Math.random() * 55);
+            return `rgba(${red}, 0, 0, 0.8)`;
+        }
+
+        let isRunning = false;
+
+        function startMessage() {
+            if (isRunning) return;
+            isRunning = true;
+            
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = '';
+            
+            const button = document.getElementById('myButton');
+            button.classList.add('hidden');
+            
+            let currentCount = 0;
+            const interval = setInterval(() => {
+                if (currentCount < 100) {
+                    const word = document.createElement('span');
+                    word.className = 'love-word';
+                    const pos = getRandomPosition();
+                    word.style.left = pos.x + 'px';
+                    word.style.top = pos.y + 'px';
+                    word.style.fontSize = getRandomSize() + 'px';
+                    word.style.color = getRandomColor();
+                    word.textContent = 'очень ';
+                    document.body.appendChild(word);
+                    setTimeout(() => word.style.animation = 'appear 0.8s ease-in-out', 10);
+                    currentCount++;
+                } else {
+                    clearInterval(interval);
+                    const finalWord = document.createElement('span');
+                    finalWord.className = 'final-word';
+                    finalWord.textContent = ' люблю!';
+                    document.body.appendChild(finalWord);
+                    setTimeout(() => finalWord.style.animation = 'finalAppear 1s ease-in-out,pulse 2s infinite', 10);
+                    
+                    // Сброс через 3 секунды
+                    setTimeout(() => {
+                        document.querySelectorAll('.love-word, .final-word').forEach(el => el.remove());
+                        button.classList.remove('hidden');
+                        isRunning = false;
+                    }, 3000);
+                }
+            }, 50);
+        }
+    </script>
+</body>
+</html>
