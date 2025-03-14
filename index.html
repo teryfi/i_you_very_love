@@ -3,6 +3,7 @@
 <head>
     <title>Любовное послание</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Amatic+SC&family=Lobster&family=Press+Start+2P&family=Shadows+Into+Light&family=Zen+Kurenaido&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -73,6 +74,7 @@
             animation: appear 0.8s ease-in-out;
             opacity: 0;
             transform: translateY(20px);
+            text-shadow: 0 0 5px rgba(255,107,107,0.5);
         }
         @keyframes appear {
             to { opacity: 1; transform: translateY(0); }
@@ -133,6 +135,56 @@
     </div>
 
     <script>
+        const translations = [
+            'very', // Английский
+            'muy', // Испанский
+            'beaucoup', // Французский
+            'sehr', // Немецкий
+            'molto', // Итальянский
+            'muito', // Португальский
+            'очень', // Русский
+            'очень', // Украинский
+            'очень', // Белорусский
+            'очень', // Башкирский
+            'очень', // Татарский
+            'очень', // Казахский
+            'очень', // Узбекский
+            'очень', // Кыргызский
+            'очень', // Таджикский
+            'очень', // Азербайджанский
+            'очень', // Молдавский
+            'очень', // Армянский
+            'очень', // Грузинский
+            'очень', // Латышский
+            'очень', // Литовский
+            'очень', // Эстонский
+            'очень', // Финский
+            'очень', // Норвежский
+            'очень', // Датский
+            'очень', // Шведский
+            'очень', // Исландский
+            'очень', // Датский
+            'очень', // Фарерский
+            'очень', // Латинский
+            'очень', // Греческий
+            'очень', // Турецкий
+            'очень', // Арабский
+            'очень', // Китайский
+            'очень', // Японский
+        ];
+
+        const fonts = [
+            'Indie Flower',
+            'Amatic SC',
+            'Lobster',
+            'Press Start 2P',
+            'Shadows Into Light',
+            'Zen Kurenaido',
+            'Cursive',
+            'Arial',
+            'sans-serif'
+        ];
+
         function getRandomPosition() {
             return {
                 x: Math.random() * (window.innerWidth - 40),
@@ -141,12 +193,11 @@
         }
 
         function getRandomSize() {
-            return 10 + Math.random() * 15; // Уменьшен диапазон для мобильных
+            return 10 + Math.random() * 15;
         }
 
         function getRandomColor() {
-            const red = Math.floor(200 + Math.random() * 55);
-            return `rgba(${red}, 0, 0, 0.8)`;
+            return `hsl(${Math.random() * 360}, 70%, 50%)`;
         }
 
         let isRunning = false;
@@ -171,7 +222,8 @@
                     word.style.top = pos.y + 'px';
                     word.style.fontSize = getRandomSize() + 'px';
                     word.style.color = getRandomColor();
-                    word.textContent = 'очень ';
+                    word.style.fontFamily = fonts[Math.floor(Math.random() * fonts.length)];
+                    word.textContent = translations[Math.floor(Math.random() * translations.length)];
                     document.body.appendChild(word);
                     setTimeout(() => word.style.animation = 'appear 0.8s ease-in-out', 10);
                     currentCount++;
