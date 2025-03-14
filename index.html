@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Любовное послание</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             margin: 0;
@@ -13,6 +14,18 @@
             font-family: 'Arial', sans-serif;
             background: #000;
             position: relative;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            button {
+                font-size: 1.2em;
+                padding: 12px 24px;
+            }
+            .final-word {
+                font-size: 2em;
+            }
         }
         @keyframes starBlink {
             0% { opacity: 0.3; }
@@ -53,7 +66,7 @@
         }
         #message {
             position: relative;
-            max-width: 80%;
+            max-width: 100%;
         }
         .love-word {
             position: absolute;
@@ -122,13 +135,13 @@
     <script>
         function getRandomPosition() {
             return {
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight
+                x: Math.random() * (window.innerWidth - 40),
+                y: Math.random() * (window.innerHeight - 40)
             };
         }
 
         function getRandomSize() {
-            return 12 + Math.random() * 20; 
+            return 10 + Math.random() * 15; // Уменьшен диапазон для мобильных
         }
 
         function getRandomColor() {
