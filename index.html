@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Любовное послание</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Indie+Flower&family=Lobster&family=Press+Start+2P&family=Shadows+Into+Light&family=Zen+Kurenaido&display=swap" rel="stylesheet">
+    <title>гульке</title>
     <style>
         body {
             margin: 0;
@@ -12,102 +10,153 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-family: 'Arial', sans-serif;
             background: #000;
             position: relative;
-        }
-        .stars {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
-        .container {
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-        button {
-            padding: 15px 40px;
-            font-size: 2em;
-            background: linear-gradient(45deg, #ff7e5f, #ff4b4b);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 0 20px #ff4b4b;
-            font-family: 'Press Start 2P', cursive;
-        }
-        button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px #ff4b4b;
-        }
-        .love-word {
-            position: absolute;
-            animation: appear 0.8s ease;
-            opacity: 0;
-            transform: translate(-50%, -50%);
-        }
-        @keyframes appear {
-            to { opacity: 1; transform: translate(-50%, -50%) translateY(-20px); }
-        }
-        .final-word {
-            position: fixed !important;
-            left: 50% !important;
-            top: 50% !important;
-            transform: translate(-50%, -50%) !important;
-            font-size: 5em;
-            font-family: 'Dancing Script', cursive;
-            color: #ff6b6b;
-            text-shadow: 
-                0 0 10px #ff6b6b,
-                0 0 20px #ff6b6b,
-                0 0 40px #ff6b6b;
-            animation: pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            border-radius: 50%;
-            animation: starBlink 1.5s infinite;
         }
         @keyframes starBlink {
             0% { opacity: 0.3; }
             50% { opacity: 1; transform: scale(1.5); }
             100% { opacity: 0.3; }
         }
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: starBlink 2s infinite;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            transition: opacity 0.5s;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #ff7e5f, #ff4b4b);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255,75,75,0.5);
+            font-weight: bold;
+            position: relative;
+            z-index: 2;
+        }
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(255,75,75,0.8);
+        }
+        #message {
+            position: relative;
+            max-width: 80%;
+        }
+        .love-word {
+            position: absolute;
+            animation: appear 0.8s ease-in-out;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        @keyframes appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .final-word {
+            font-size: 3em;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: finalAppear 1s ease-in-out, pulse 2s infinite;
+            z-index: 4;
+            mix-blend-mode: screen;
+            text-shadow: 
+                0 0 10px #ff6b6b,
+                0 0 20px #ff6b6b,
+                0 0 40px #ff6b6b;
+            background: linear-gradient(45deg, #ff4b4b, #ff7e5f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Cursive', cursive;
+            font-weight: bold;
+            transform-style: preserve-3d;
+        }
+        @keyframes finalAppear {
+            from { opacity: 0; transform: scale(0) translate(-50%, -50%); }
+            to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
+        }
+        @keyframes pulse {
+            0% { text-shadow: 0 0 10px #ff6b6b; }
+            50% { text-shadow: 0 0 30px #ff6b6b; }
+            100% { text-shadow: 0 0 10px #ff6b6b; }
+        }
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        /* Новые стили для разнообразия */
+        .love-word.style1 {
+            font-family: 'Impact', sans-serif;
+            text-shadow: 0 0 10px #ff4b4b;
+        }
+        .love-word.style2 {
+            font-family: 'cursive';
+            transform: rotate(-10deg);
+        }
+        .love-word.style3 {
+            font-family: 'monospace';
+            text-shadow: 0 0 5px #fff;
+        }
+        .love-word.style4 {
+            font-family: 'Arial Black';
+            color: #ff4b4b;
+        }
+        .love-word.style5 {
+            font-family: 'Comic Sans MS';
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <div class="stars"></div>
+    <!-- Звезды -->
+    <div class="stars">
+        <script>
+            for(let i=0; i<50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random()*100 + 'vw';
+                star.style.top = Math.random()*100 + 'vh';
+                document.body.appendChild(star);
+            }
+        </script>
+    </div>
+
     <div class="container">
-        <button onclick="startMessage()">очень?</button>
+        <button id="myButton" onclick="startMessage()">очень?</button>
+        <div id="message"></div>
     </div>
 
     <script>
-        const translations = [
-            'very', 'очень', 'очень', 'очень', 'очень', 
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень',
-            'очень', 'очень', 'очень', 'очень', 'очень'
-        ];
+        const fonts = ['Arial', 'Impact', 'cursive', 'monospace', 'Arial Black', 'Comic Sans MS'];
+        
+        function getRandomPosition() {
+            return {
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight
+            };
+        }
+
+        function getRandomSize() {
+            return 12 + Math.random() * 28; // Теперь от 12 до 40px
+        }
+
+        function getRandomColor() {
+            return `hsl(${Math.random() * 360}, 70%, 50%)`;
+        }
 
         let isRunning = false;
 
@@ -115,61 +164,47 @@
             if (isRunning) return;
             isRunning = true;
             
-            const button = document.querySelector('button');
-            button.style.display = 'none';
+            const messageDiv = document.getElementById('message');
+            messageDiv.innerHTML = '';
+            
+            const button = document.getElementById('myButton');
+            button.classList.add('hidden');
             
             let currentCount = 0;
             const interval = setInterval(() => {
                 if (currentCount < 100) {
                     const word = document.createElement('span');
-                    word.className = 'love-word';
-                    word.textContent = translations[Math.floor(Math.random() * translations.length)];
+                    word.className = `love-word style${Math.floor(Math.random() * 5) + 1}`;
+                    const pos = getRandomPosition();
+                    word.style.left = pos.x + 'px';
+                    word.style.top = pos.y + 'px';
+                    word.style.fontSize = getRandomSize() + 'px';
+                    word.style.color = getRandomColor();
+                    word.textContent = 'очень ';
                     
-                    // Стилизация
-                    word.style.position = 'absolute';
-                    word.style.left = Math.random() * 100 + '%';
-                    word.style.top = Math.random() * 100 + '%';
-                    word.style.fontSize = Math.random() * 40 + 16 + 'px';
-                    word.style.color = `hsl(${Math.random() * 360}, 70%, 50%)`;
-                    word.style.fontFamily = [
-                        'Indie Flower', 
-                        'Lobster', 
-                        'Shadows Into Light', 
-                        'Zen Kurenaido', 
-                        'Dancing Script'
-                    ][Math.floor(Math.random() * 5)];
+                    // Добавляем случайные эффекты
+                    if (Math.random() > 0.5) {
+                        word.style.textShadow = `0 0 ${Math.random() * 5 + 2}px ${getRandomColor()}`;
+                    }
                     
-                    // Добавляем и анимируем
                     document.body.appendChild(word);
-                    setTimeout(() => word.style.animation = 'appear 0.8s ease', 10);
-                    
+                    setTimeout(() => word.style.animation = 'appear 0.8s ease-in-out', 10);
                     currentCount++;
                 } else {
                     clearInterval(interval);
-                    
-                    // Добавляем финальную надпись
-                    const finalWord = document.createElement('div');
+                    const finalWord = document.createElement('span');
                     finalWord.className = 'final-word';
                     finalWord.textContent = ' люблю!';
                     document.body.appendChild(finalWord);
+                    setTimeout(() => finalWord.style.animation = 'finalAppear 1s ease-in-out,pulse 2s infinite', 10);
                     
-                    // Восстанавливаем кнопку через 3 секунды
                     setTimeout(() => {
-                        button.style.display = 'block';
-                        finalWord.remove();
+                        document.querySelectorAll('.love-word, .final-word').forEach(el => el.remove());
+                        button.classList.remove('hidden');
                         isRunning = false;
                     }, 3000);
                 }
             }, 50);
-        }
-
-        // Генерация звезд
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + 'vw';
-            star.style.top = Math.random() * 100 + 'vh';
-            document.querySelector('.stars').appendChild(star);
         }
     </script>
 </body>
